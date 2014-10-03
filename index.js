@@ -1,6 +1,8 @@
 var esprima = require('esprima');
+var acorn = require('acorn');
 var fs = require('vinyl-fs');
 var map = require('map-stream');
+
 
 
 var files = [];
@@ -21,8 +23,8 @@ function storeFile(file){
         try{
             files.push({
                 path : file.path,
-                content : contentString,
-                ast : esprima.parse(contentString,esprimaOptions)
+                content : contentString, // Should the next line be acorn_loose?
+                ast : acorn.parse_dammit(contentString,esprimaOptions)
             });
         }
         catch(c){
